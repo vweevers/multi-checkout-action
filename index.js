@@ -6,7 +6,8 @@ const path = require('path')
 
 async function main () {
   const items = (process.env.INPUT_REPOSITORIES || '').split(/[\r\n]+/).filter(Boolean)
-  const basedir = process.env.INPUT_PATH || '..'
+  const workspace = process.env.GITHUB_WORKSPACE || '.'
+  const basedir = path.resolve(workspace, process.env.INPUT_PATH || '..')
   const debug = {}
   const env = {}
 
@@ -28,16 +29,29 @@ async function main () {
       throw new Error('Repository must be in the form of "owner/name[@ref]"')
     }
 
+    const dir = path.join(basedir, repository)
+
     console.log('::group::Checkout %s', item)
-    console.log(require('util').inspect({ repository, ref, owner, name, debug }, { depth: null }))
+    console.log(require('util').inspect({
+      repository,
+      ref,
+      owner,
+      name,
+      dir,
+      debug
+    }, { depth: null }))
 
     await exec(process.execPath, [checkout], {
       env: {
         ...env,
         INPUT_REPOSITORY: repository,
         INPUT_REF: ref || '',
-        INPUT_PATH: path.join(basedir, repository),
+        INPUT_PATH: dir,
         'INPUT_PERSIST-CREDENTIALS': 'false',
+
+        // Circumvent actions/checkout restriction that
+        // INPUT_PATH must be under workspace
+        GITHUB_WORKSPACE: path.dirname(dir),
 
         // To be safe, unset variables that might be used as defaults
         GITHUB_REPOSITORY: '',
