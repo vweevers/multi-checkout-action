@@ -33,16 +33,6 @@ async function main () {
     const dir = path.join(basedir, repository)
     const parent = path.dirname(dir)
 
-    console.log('::group::Checkout %s', item)
-    console.log(require('util').inspect({
-      repository,
-      ref,
-      owner,
-      name,
-      dir,
-      debug
-    }, { depth: null }))
-
     await fsp.mkdir(parent, { recursive: true })
     await exec(process.execPath, [script], {
       env: {
@@ -65,8 +55,6 @@ async function main () {
       },
       stdio: ['ignore', 1, 1]
     })
-
-    console.log('::endgroup::')
   }
 }
 
