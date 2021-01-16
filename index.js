@@ -54,7 +54,7 @@ async function main () {
 
         // Circumvent actions/checkout restriction that
         // INPUT_PATH must be under workspace
-        // GITHUB_WORKSPACE: parent,
+        GITHUB_WORKSPACE: parent,
 
         // To be safe, unset variables that might be used as defaults
         GITHUB_REPOSITORY: '',
