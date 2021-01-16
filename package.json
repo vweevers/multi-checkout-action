@@ -1,0 +1,33 @@
+{
+  "name": "multi-checkout-action",
+  "version": "0.0.0",
+  "description": "A GitHub Action to checkout multiple additional repositories",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "standard",
+    "build": "cp node_modules/checkout/dist/index.js dist/checkout.js"
+  },
+  "dependencies": {
+    "checkout": "github:actions/checkout#v2.3.4"
+  },
+  "devDependencies": {
+    "standard": "^16.0.1"
+  },
+  "repository": "vweevers/multi-checkout-action",
+  "engines": {
+    "node": ">=12"
+  },
+  "standard": {
+    "ignore": [
+      "dist"
+    ]
+  },
+  "keywords": [
+    "action",
+    "checkout",
+    "clone",
+    "multi",
+    "repository"
+  ]
+}
