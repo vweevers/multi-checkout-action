@@ -4,16 +4,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Multi Checkout
+        uses: ./
         with:
           repositories: |
             vweevers/hallmark-lint-action
-            vweevers/additional-tags-action
-            vweevers/dotnet-bump@v1.3.0
-      - run: ls ../vweevers
-      - run: cat ../vweevers/.gitignore
-      - run: git -C ../vweevers/hallmark-lint-action log -n 1
-      - run: git -C ../vweevers/additional-tags-action log -n 1
-      - run: git -C ../vweevers/dotnet-bump log -n 1
-      - run: npm it
+            vweevers/additional-tags-action@v1.0
+      - name: Verify
+        run: git -C ../vweevers/additional-tags-action log -n 1
+      - name: Test
+        run: npm it

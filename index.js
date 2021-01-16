@@ -1,6 +1,6 @@
 'use strict'
 
-const script = require.resolve('./child.js')
+const script = require.resolve('./dist/checkout.js')
 const spawn = require('child_process').spawn
 const fsp = require('fs').promises
 const path = require('path')
@@ -9,16 +9,11 @@ async function main () {
   const items = (process.env.INPUT_REPOSITORIES || '').split(/[\r\n]+/).filter(Boolean)
   const workspace = path.resolve(process.env.GITHUB_WORKSPACE || '.')
   const basedir = path.resolve(workspace, process.env.INPUT_PATH || '..')
-  const debug = {}
   const env = {}
 
   for (const k in process.env) {
     if (!/^INPUT_(REPOSITORIES|REPOSITORY|REF|PATH|PERSIST.CREDENTIALS)$/i.test(k)) {
       env[k] = process.env[k]
-
-      if (/^INPUT_/i.test(k)) {
-        debug[k] = process.env[k]
-      }
     }
   }
 
@@ -49,7 +44,7 @@ async function main () {
         // INPUT_PATH must be under workspace
         GITHUB_WORKSPACE: path.dirname(workspace),
 
-        // To be safe, unset variables that might be used as defaults
+        // Unset variables that might be used as defaults
         GITHUB_REPOSITORY: '',
         GITHUB_SHA: '',
         GITHUB_REF: '',
