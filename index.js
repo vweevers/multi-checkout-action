@@ -1,6 +1,6 @@
 'use strict'
 
-const checkout = require.resolve('./dist/checkout.js')
+const script = require.resolve('./child.js')
 const spawn = require('child_process').spawn
 const fsp = require('fs').promises
 const path = require('path')
@@ -44,7 +44,7 @@ async function main () {
     }, { depth: null }))
 
     await fsp.mkdir(parent, { recursive: true })
-    await exec(process.execPath, [checkout], {
+    await exec(process.execPath, [script], {
       env: {
         ...env,
         INPUT_REPOSITORY: repository,
