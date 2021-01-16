@@ -7,7 +7,7 @@ const path = require('path')
 
 async function main () {
   const items = (process.env.INPUT_REPOSITORIES || '').split(/[\r\n]+/).filter(Boolean)
-  const workspace = process.env.GITHUB_WORKSPACE || '.'
+  const workspace = path.resolve(process.env.GITHUB_WORKSPACE || '.')
   const basedir = path.resolve(workspace, process.env.INPUT_PATH || '..')
   const debug = {}
   const env = {}
@@ -32,8 +32,11 @@ async function main () {
 
     const dir = path.join(basedir, repository)
     const parent = path.dirname(dir)
+    const gitignore = path.join(parent, '.gitignore')
 
     await fsp.mkdir(parent, { recursive: true })
+    await fsp.appendFile(gitignore, '\n' + name)
+
     await exec(process.execPath, [script], {
       env: {
         ...env,
@@ -44,7 +47,7 @@ async function main () {
 
         // Circumvent actions/checkout restriction that
         // INPUT_PATH must be under workspace
-        GITHUB_WORKSPACE: parent,
+        GITHUB_WORKSPACE: path.dirname(workspace),
 
         // To be safe, unset variables that might be used as defaults
         GITHUB_REPOSITORY: '',

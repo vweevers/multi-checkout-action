@@ -12,6 +12,7 @@ jobs:
             vweevers/additional-tags-action
             vweevers/dotnet-bump@v1.3.0
       - run: ls ../vweevers
+      - run: cat ../vweevers/.gitignore
       - run: git -C ../vweevers/hallmark-lint-action log -n 1
       - run: git -C ../vweevers/additional-tags-action log -n 1
       - run: git -C ../vweevers/dotnet-bump log -n 1
