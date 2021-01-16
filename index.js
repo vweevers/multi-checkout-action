@@ -2,6 +2,7 @@
 
 const checkout = require.resolve('./dist/checkout.js')
 const spawn = require('child_process').spawn
+const fsp = require('fs').promises
 const path = require('path')
 
 async function main () {
@@ -30,6 +31,7 @@ async function main () {
     }
 
     const dir = path.join(basedir, repository)
+    const parent = path.dirname(dir)
 
     console.log('::group::Checkout %s', item)
     console.log(require('util').inspect({
@@ -41,6 +43,7 @@ async function main () {
       debug
     }, { depth: null }))
 
+    await fsp.mkdir(parent, { recursive: true })
     await exec(process.execPath, [checkout], {
       env: {
         ...env,
@@ -51,7 +54,7 @@ async function main () {
 
         // Circumvent actions/checkout restriction that
         // INPUT_PATH must be under workspace
-        GITHUB_WORKSPACE: path.dirname(dir),
+        GITHUB_WORKSPACE: parent,
 
         // To be safe, unset variables that might be used as defaults
         GITHUB_REPOSITORY: '',
@@ -67,7 +70,10 @@ async function main () {
   }
 }
 
-main()
+main().catch(err => {
+  console.error(err)
+  process.exit(1)
+})
 
 async function exec (command, args, options) {
   return new Promise(function (resolve, reject) {
