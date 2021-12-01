@@ -9,7 +9,7 @@
     "build": "cp node_modules/checkout/dist/index.js dist/checkout.js && cp node_modules/checkout/dist/problem-matcher.json dist/problem-matcher.json"
   },
   "dependencies": {
-    "checkout": "github:actions/checkout#v2.3.4"
+    "checkout": "github:actions/checkout#v2.4.0"
   },
   "devDependencies": {
     "standard": "^16.0.1"
