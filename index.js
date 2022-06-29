@@ -6,7 +6,7 @@ const fsp = require('fs').promises
 const path = require('path')
 
 async function main () {
-  const items = (process.env.INPUT_REPOSITORIES || '').split(/[\s]+/).filter(Boolean)
+  const items = (process.env.INPUT_REPOSITORIES || '').split(/\s+/).filter(Boolean)
   const workspace = path.resolve(process.env.GITHUB_WORKSPACE || '.')
   const basedir = path.resolve(workspace, process.env.INPUT_PATH || '..')
   const env = {}
