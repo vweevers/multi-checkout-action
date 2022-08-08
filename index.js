@@ -45,9 +45,9 @@ async function main () {
         GITHUB_WORKSPACE: path.dirname(workspace),
 
         // Unset variables that might be used as defaults
-        GITHUB_REPOSITORY: '',
+        GITHUB_REPOSITORY: repository,
         GITHUB_SHA: '',
-        GITHUB_REF: '',
+        GITHUB_REF: ref || '',
         GITHUB_HEAD_REF: '',
         GITHUB_BASE_REF: ''
       },
