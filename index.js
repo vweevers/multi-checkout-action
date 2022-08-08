@@ -44,10 +44,12 @@ async function main () {
         // INPUT_PATH must be under workspace
         GITHUB_WORKSPACE: path.dirname(workspace),
 
-        // Unset variables that might be used as defaults
+        // GITHUB_REPOSITORY and GITHUB_REF are used for scheduled runs too
         GITHUB_REPOSITORY: repository,
-        GITHUB_SHA: '',
         GITHUB_REF: ref || '',
+
+        // Unset variables that might be used as defaults
+        GITHUB_SHA: '',
         GITHUB_HEAD_REF: '',
         GITHUB_BASE_REF: ''
       },
