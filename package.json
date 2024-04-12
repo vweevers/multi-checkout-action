@@ -1,6 +1,6 @@
 {
   "name": "multi-checkout-action",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A GitHub Action to checkout multiple additional repositories",
   "license": "MIT",
   "private": true,
