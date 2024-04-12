@@ -7,7 +7,7 @@
 
 ## Deprecation Notice
 
-**This action is deprecated and will be unpublished in 2025.** I originally wrote it to use actions from private repositories. GitHub has sinced implemented a [a built-in way](https://docs.github.com/en/actions/creating-actions/sharing-actions-and-workflows-from-your-private-repository) to share such actions, removing the need for `multi-checkout-action`.
+**This action is deprecated and will be unpublished in 2025.** I originally wrote it to use actions from private repositories. GitHub has since implemented [a built-in way](https://docs.github.com/en/actions/creating-actions/sharing-actions-and-workflows-from-your-private-repository) to share such actions, removing the need for `multi-checkout-action`.
 
 ## Usage
 
