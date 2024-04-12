@@ -1,9 +1,13 @@
 # multi-checkout-action
 
-**A [GitHub Action](https://github.com/features/actions) that wraps [`actions/checkout`](https://github.com/actions/checkout) to checkout multiple additional repositories.**
+**A [GitHub Action](https://github.com/features/actions) that wraps [`actions/checkout`](https://github.com/actions/checkout) to checkout multiple additional repositories.** 
 
 ![GitHub tag](https://img.shields.io/github/v/tag/vweevers/multi-checkout-action?sort=semver)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+## Deprecation Notice
+
+**This action is deprecated and will be unpublished in 2025.** I originally wrote it to use actions from private repositories. GitHub has since implemented [a built-in way](https://docs.github.com/en/actions/creating-actions/sharing-actions-and-workflows-from-your-private-repository) to share such actions, removing the need for `multi-checkout-action`.
 
 ## Usage
 
